@@ -58,6 +58,7 @@ var projectAll = function() {
 
 var appendDisplayList = function() {
   var list = document.createElement('ul');
+  list.textContent = this.locName;
   this.projectAll();
   for(var i = 0;i < this.customersHourly.length;i++) {
     var item = document.createElement('li');

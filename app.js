@@ -6,64 +6,85 @@ locations.push({ locName: 'South Lake Union', minCust: 5, maxCust: 18, avgCups: 
 locations.push({ locName: 'Sea-Tac Airport', minCust: 28, maxCust: 44, avgCups: 1.1, avgLbs: 0.41 });
 
 var generateCustomers = function() {
-  this.customerAmounts = [];
-  for (var i = 0;i < 16;i++) {
-    this.customerAmounts[i] = randInt(this.minCust, this.maxCust);
+  this.customersHourly = [];
+  this.totalCustomers = 0;
+  for (var i = 0;i < 15;i++) {
+    this.customersHourly[i] = randInt(this.minCust, this.maxCust);
+    this.totalCustomers += this.customersHourly[i];
   }
 };
 
 var projectCupsPH = function() {
   this.cupsHourly = [];
-  for (var i = 0;i < 16;i++) {
-    this.cupsHourly[i] = this.customerAmounts[i] * this.avgCups;
+  this.totalCups = 0;
+  for (var i = 0;i < 15;i++) {
+    this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
+    this.totalCups += this.cupsHourly[i];
   }
 };
 
-var projectPoundsPH = function() {
-  this.poundsHourly = [];
-  for (var i = 0;i < 16;i++) {
-    this.poundsHourly[i] = this.customerAmounts[i] * this.avgLbs;
+var projectToGoPH = function() {
+  this.togoHourly = [];
+  this.totalToGo = 0;
+  for (var i = 0;i < 15;i++) {
+    this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
+    this.totalToGo += this.togoHourly[i];
   }
 };
 
-var projectBeansPH = function() {
-  this.beansHourly = [];
-  for (var i = 0;i < 16;i++) {
-    this.beansHourly[i] = this.cupsHourly[i] / 16;
+var projectBeansForCupsPH = function() {
+  this.beansPerCupHourly = [];
+  this.beanTotal = 0;
+  for (var i = 0;i < 15;i++) {
+    this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
+    this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
   }
 };
 
 var projectEmployeesPH = function() {
   this.employeesHourly = [];
-  for (var i = 0;i < 16;i++) {
-    this.employeesHourly[i] = Math.ceil((this.customerAmounts[i] * 2) / 60);
+  for (var i = 0;i < 15;i++) {
+    this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
   }
 };
 
 var projectAll = function() {
   this.generateCustomers();
   this.projectCupsPH();
-  this.projectPoundsPH();
-  this.projectBeansPH();
+  this.projectToGoPH();
+  this.projectBeansForCupsPH();
   this.projectEmployeesPH();
 };
 
 var appendDisplayList = function() {
   var list = document.createElement('ul');
   this.projectAll();
-  for(var i = 0;i < this.customerAmounts.length;i++) {
+  for(var i = 0;i < this.customersHourly.length;i++) {
     var item = document.createElement('li');
-    item.textContent = hourToTime(i) + ': ' + (Math.round((this.beansHourly[i] + this.poundsHourly[i]) * 10) / 10);
+    item.textContent = hourToTime(i) + ': ' + round(this.beansPerCupHourly[i] + this.togoHourly[i], 10) + ' lbs [' + this.customersHourly[i] + ' customers, ' +
+    round(this.cupsHourly[i], 10) + ' cups (' + round(this.beansPerCupHourly[i], 10) + ' lbs), ' + this.togoHourly[i] + ' lbs to-go]';
     list.appendChild(item);
   };
+  var custTotal = document.createElement('li');
+  custTotal.textContent = 'Total customers at ' + this.locName + ': ' + this.totalCustomers;
+  list.appendChild(custTotal);
+  var cupsSold = document.createElement('li');
+  cupsSold.textContent = 'Total cups sold at ' + this.locName + ': ' + Math.round(this.totalCups);
+  list.appendChild(cupsSold);
+  var togoTotal = document.createElement('li');
+  togoTotal.textContent = 'Total to-go pound packages sold at ' + this.locName + ': ' + this.totalToGo;
+  list.appendChild(togoTotal);
+  var totalBeans = document.createElement('li');
+  totalBeans.textContent = 'Total pounds of beans needed at ' + this.locName + ': ' + round(this.beanTotal, 10);
+  list.appendChild(totalBeans);
   document.getElementById('res-display').appendChild(list);
 };
 
 for (var i = 0;i < locations.length;i++) {
   locations[i].generateCustomers = generateCustomers;
   locations[i].projectCupsPH = projectCupsPH;
-  locations[i].projectPoundsPH = projectPoundsPH;
-  locations[i].projectBeansPH = projectBeansPH;
+  locations[i].projectToGoPH = projectToGoPH;
+  locations[i].projectBeansForCupsPH = projectBeansForCupsPH;
   locations[i].projectEmployeesPH = projectEmployeesPH;
   locations[i].projectAll = projectAll;
   locations[i].appendDisplayList = appendDisplayList;
@@ -74,6 +95,10 @@ for (var i = 0;i < locations.length;i++) {
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+function round(number, dec) {
+  return Math.round(number * dec) / dec;
+};
 
 function hourToTime(hour) {
   var hours = [6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];

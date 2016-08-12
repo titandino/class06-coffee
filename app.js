@@ -66,7 +66,7 @@ CoffeeShop.prototype.displaySalesData = function() {
   var shopRow = document.createElement('tr');
   appendNewElement(shopRow, 'td', this.locName);
   appendNewElement(shopRow, 'td', round(this.beanTotal, 10));
-  for (var i = 0;i < this.beansPerCupHourly.length;i++) {
+  for (var i = 0;i < 15;i++) {
     appendNewElement(shopRow, 'td', round((this.beansPerCupHourly[i] + this.togoHourly[i]), 10));
   }
   table.appendChild(shopRow);
@@ -77,7 +77,7 @@ CoffeeShop.prototype.displayEmployeesData = function() {
   var shopRow = document.createElement('tr');
   appendNewElement(shopRow, 'td', this.locName);
   appendNewElement(shopRow, 'td', this.maxEmployeesNeeded);
-  for (var i = 0;i < this.employeesHourly.length;i++) {
+  for (var i = 0;i < 15;i++) {
     appendNewElement(shopRow, 'td', this.employeesHourly[i]);
   }
   table.appendChild(shopRow);

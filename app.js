@@ -1,297 +1,121 @@
-var locations = [];
+function CoffeeShop(location, minCust, maxCust, avgCups, avgLbs) {
+  this.locName = location;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCups = avgCups;
+  this.avgLbs = avgLbs;
+  this.maxEmployeesNeeded = 0;
+  this.projectAll();
+}
 
-locations.push({
-  locName: 'Pike Place Market',
-  minCust: 14,
-  maxCust: 35,
-  avgCups: 1.2,
-  avgLbs: 0.34,
-  generateCustomers: function() {
-    this.customersHourly = [];
-    this.totalCustomers = 0;
-    for (var i = 0;i < 15;i++) {
-      this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-      this.totalCustomers += this.customersHourly[i];
-    }
-  },
-  projectCupsPH: function() {
-    this.cupsHourly = [];
-    this.totalCups = 0;
-    for (var i = 0;i < 15;i++) {
-      this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-      this.totalCups += this.cupsHourly[i];
-    }
-  },
-  projectToGoPH: function() {
-    this.togoHourly = [];
-    this.totalToGo = 0;
-    for (var i = 0;i < 15;i++) {
-      this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-      this.totalToGo += this.togoHourly[i];
-    }
-  },
-  projectBeansForCupsPH: function() {
-    this.beansPerCupHourly = [];
-    this.beanTotal = 0;
-    for (var i = 0;i < 15;i++) {
-      this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-      this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
-    }
-  },
-  projectEmployeesPH: function() {
-    this.employeesHourly = [];
-    for (var i = 0;i < 15;i++) {
-      this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    }
-  },
-  projectAll: function() {
-    this.generateCustomers();
-    this.projectCupsPH();
-    this.projectToGoPH();
-    this.projectBeansForCupsPH();
-    this.projectEmployeesPH();
+CoffeeShop.prototype.generateCustomers = function() {
+  this.customersHourly = [];
+  this.totalCustomers = 0;
+  for (var i = 0;i < 15;i++) {
+    this.customersHourly[i] = randInt(this.minCust, this.maxCust);
+    this.totalCustomers += this.customersHourly[i];
   }
-});
-
-locations.push({
-  locName: 'Capitol Hill',
-  minCust: 12,
-  maxCust: 28,
-  avgCups: 3.2,
-  avgLbs: 0.03,
-  generateCustomers: function() {
-    this.customersHourly = [];
-    this.totalCustomers = 0;
-    for (var i = 0;i < 15;i++) {
-      this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-      this.totalCustomers += this.customersHourly[i];
-    }
-  },
-  projectCupsPH: function() {
-    this.cupsHourly = [];
-    this.totalCups = 0;
-    for (var i = 0;i < 15;i++) {
-      this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-      this.totalCups += this.cupsHourly[i];
-    }
-  },
-  projectToGoPH: function() {
-    this.togoHourly = [];
-    this.totalToGo = 0;
-    for (var i = 0;i < 15;i++) {
-      this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-      this.totalToGo += this.togoHourly[i];
-    }
-  },
-  projectBeansForCupsPH: function() {
-    this.beansPerCupHourly = [];
-    this.beanTotal = 0;
-    for (var i = 0;i < 15;i++) {
-      this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-      this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
-    }
-  },
-  projectEmployeesPH: function() {
-    this.employeesHourly = [];
-    for (var i = 0;i < 15;i++) {
-      this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    }
-  },
-  projectAll: function() {
-    this.generateCustomers();
-    this.projectCupsPH();
-    this.projectToGoPH();
-    this.projectBeansForCupsPH();
-    this.projectEmployeesPH();
-  }
-});
-
-locations.push({
-  locName: 'Seattle Public Library',
-  minCust: 9,
-  maxCust: 45,
-  avgCups: 2.6,
-  avgLbs: 0.02,
-  generateCustomers: function() {
-    this.customersHourly = [];
-    this.totalCustomers = 0;
-    for (var i = 0;i < 15;i++) {
-      this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-      this.totalCustomers += this.customersHourly[i];
-    }
-  },
-  projectCupsPH: function() {
-    this.cupsHourly = [];
-    this.totalCups = 0;
-    for (var i = 0;i < 15;i++) {
-      this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-      this.totalCups += this.cupsHourly[i];
-    }
-  },
-  projectToGoPH: function() {
-    this.togoHourly = [];
-    this.totalToGo = 0;
-    for (var i = 0;i < 15;i++) {
-      this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-      this.totalToGo += this.togoHourly[i];
-    }
-  },
-  projectBeansForCupsPH: function() {
-    this.beansPerCupHourly = [];
-    this.beanTotal = 0;
-    for (var i = 0;i < 15;i++) {
-      this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-      this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
-    }
-  },
-  projectEmployeesPH: function() {
-    this.employeesHourly = [];
-    for (var i = 0;i < 15;i++) {
-      this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    }
-  },
-  projectAll: function() {
-    this.generateCustomers();
-    this.projectCupsPH();
-    this.projectToGoPH();
-    this.projectBeansForCupsPH();
-    this.projectEmployeesPH();
-  }
-});
-
-locations.push({
-  locName: 'South Lake Union',
-  minCust: 5,
-  maxCust: 18,
-  avgCups: 1.3,
-  avgLbs: 0.04,
-  generateCustomers: function() {
-    this.customersHourly = [];
-    this.totalCustomers = 0;
-    for (var i = 0;i < 15;i++) {
-      this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-      this.totalCustomers += this.customersHourly[i];
-    }
-  },
-  projectCupsPH: function() {
-    this.cupsHourly = [];
-    this.totalCups = 0;
-    for (var i = 0;i < 15;i++) {
-      this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-      this.totalCups += this.cupsHourly[i];
-    }
-  },
-  projectToGoPH: function() {
-    this.togoHourly = [];
-    this.totalToGo = 0;
-    for (var i = 0;i < 15;i++) {
-      this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-      this.totalToGo += this.togoHourly[i];
-    }
-  },
-  projectBeansForCupsPH: function() {
-    this.beansPerCupHourly = [];
-    this.beanTotal = 0;
-    for (var i = 0;i < 15;i++) {
-      this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-      this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
-    }
-  },
-  projectEmployeesPH: function() {
-    this.employeesHourly = [];
-    for (var i = 0;i < 15;i++) {
-      this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    }
-  },
-  projectAll: function() {
-    this.generateCustomers();
-    this.projectCupsPH();
-    this.projectToGoPH();
-    this.projectBeansForCupsPH();
-    this.projectEmployeesPH();
-  }
-});
-
-locations.push({
-  locName: 'Sea-Tac Airport',
-  minCust: 28,
-  maxCust: 44,
-  avgCups: 1.1,
-  avgLbs: 0.41,
-  generateCustomers: function() {
-    this.customersHourly = [];
-    this.totalCustomers = 0;
-    for (var i = 0;i < 15;i++) {
-      this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-      this.totalCustomers += this.customersHourly[i];
-    }
-  },
-  projectCupsPH: function() {
-    this.cupsHourly = [];
-    this.totalCups = 0;
-    for (var i = 0;i < 15;i++) {
-      this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-      this.totalCups += this.cupsHourly[i];
-    }
-  },
-  projectToGoPH: function() {
-    this.togoHourly = [];
-    this.totalToGo = 0;
-    for (var i = 0;i < 15;i++) {
-      this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-      this.totalToGo += this.togoHourly[i];
-    }
-  },
-  projectBeansForCupsPH: function() {
-    this.beansPerCupHourly = [];
-    this.beanTotal = 0;
-    for (var i = 0;i < 15;i++) {
-      this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-      this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
-    }
-  },
-  projectEmployeesPH: function() {
-    this.employeesHourly = [];
-    for (var i = 0;i < 15;i++) {
-      this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    }
-  },
-  projectAll: function() {
-    this.generateCustomers();
-    this.projectCupsPH();
-    this.projectToGoPH();
-    this.projectBeansForCupsPH();
-    this.projectEmployeesPH();
-  }
-});
-
-function appendDisplayList(location) {
-  var list = document.createElement('ul');
-  location.textContent = location.locName;
-  location.projectAll();
-  for(var i = 0;i < location.customersHourly.length;i++) {
-    var item = document.createElement('li');
-    item.textContent = hourToTime(i) + ': ' + round(location.beansPerCupHourly[i] + location.togoHourly[i], 10) + ' lbs [' + location.customersHourly[i] + ' customers, ' +
-    round(location.cupsHourly[i], 10) + ' cups (' + round(location.beansPerCupHourly[i], 10) + ' lbs), ' + location.togoHourly[i] + ' lbs to-go]';
-    list.appendChild(item);
-  };
-  var custTotal = document.createElement('li');
-  custTotal.textContent = 'Total customers at ' + location.locName + ': ' + location.totalCustomers;
-  list.appendChild(custTotal);
-  var cupsSold = document.createElement('li');
-  cupsSold.textContent = 'Total cups sold at ' + location.locName + ': ' + Math.round(location.totalCups);
-  list.appendChild(cupsSold);
-  var togoTotal = document.createElement('li');
-  togoTotal.textContent = 'Total to-go pound packages sold at ' + location.locName + ': ' + location.totalToGo;
-  list.appendChild(togoTotal);
-  var totalBeans = document.createElement('li');
-  totalBeans.textContent = 'Total pounds of beans needed at ' + location.locName + ': ' + round(location.beanTotal, 10);
-  list.appendChild(totalBeans);
-  document.getElementById('res-display').appendChild(list);
 };
 
-for (var i = 0;i < locations.length;i++) {
-  appendDisplayList(locations[i]);
+CoffeeShop.prototype.projectCupsPH = function() {
+  this.cupsHourly = [];
+  this.totalCups = 0;
+  for (var i = 0;i < 15;i++) {
+    this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
+    this.totalCups += this.cupsHourly[i];
+  }
+};
+
+CoffeeShop.prototype.projectToGoPH = function() {
+  this.togoHourly = [];
+  this.totalToGo = 0;
+  for (var i = 0;i < 15;i++) {
+    this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
+    this.totalToGo += this.togoHourly[i];
+  }
+};
+
+CoffeeShop.prototype.projectBeansForCupsPH = function() {
+  this.beansPerCupHourly = [];
+  this.beanTotal = 0;
+  for (var i = 0;i < 15;i++) {
+    this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
+    this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
+  }
+};
+
+CoffeeShop.prototype.projectEmployeesPH = function() {
+  this.employeesHourly = [];
+  for (var i = 0;i < 15;i++) {
+    this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
+    if (this.maxEmployeesNeeded < this.employeesHourly[i])
+      this.maxEmployeesNeeded = this.employeesHourly[i];
+  }
+};
+
+CoffeeShop.prototype.projectAll = function() {
+  this.generateCustomers();
+  this.projectCupsPH();
+  this.projectToGoPH();
+  this.projectBeansForCupsPH();
+  this.projectEmployeesPH();
+};
+
+CoffeeShop.prototype.displaySalesData = function() {
+  var table = document.getElementById('sales-table');
+  var shopRow = document.createElement('tr');
+  appendNewElement(shopRow, 'td', this.locName);
+  appendNewElement(shopRow, 'td', round(this.beanTotal, 10));
+  for (var i = 0;i < 15;i++) {
+    appendNewElement(shopRow, 'td', round((this.beansPerCupHourly[i] + this.togoHourly[i]), 10));
+  }
+  table.appendChild(shopRow);
+};
+
+CoffeeShop.prototype.displayEmployeesData = function() {
+  var table = document.getElementById('employees-table');
+  var shopRow = document.createElement('tr');
+  appendNewElement(shopRow, 'td', this.locName);
+  appendNewElement(shopRow, 'td', this.maxEmployeesNeeded);
+  for (var i = 0;i < 15;i++) {
+    appendNewElement(shopRow, 'td', this.employeesHourly[i]);
+  }
+  table.appendChild(shopRow);
+};
+
+function main() {
+  var locations = [];
+  locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
+  locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
+  locations.push(new CoffeeShop('Capitol Hill', 12, 28, 3.2, 0.03));
+  locations.push(new CoffeeShop('Seattle Public Library', 9, 45, 2.6, 0.02));
+  locations.push(new CoffeeShop('South Lake Union', 5, 18, 1.3, 0.04));
+  locations.push(new CoffeeShop('Sea-Tac Airport', 28, 44, 1.1, 0.41));
+
+  createShopTable('sales-table');
+  createShopTable('employees-table');
+
+  for (var i = 0;i < locations.length;i++) {
+    locations[i].displaySalesData();
+    locations[i].displayEmployeesData();
+  }
+}
+
+function createShopTable(tableName) {
+  var table = document.getElementById(tableName);
+  var header = document.createElement('tr');
+  appendNewElement(header, 'th', 'Location');
+  appendNewElement(header, 'th', 'Total');
+  for (var i = 0;i < 15;i++) {
+    appendNewElement(header, 'th', hourToTime(i));
+  }
+  table.appendChild(header);
+}
+
+function appendNewElement(parent, elementType, text) {
+  var ele = document.createElement(elementType);
+  ele.textContent = text;
+  parent.appendChild(ele);
 }
 
 function randInt(min, max) {
@@ -304,5 +128,7 @@ function round(number, dec) {
 
 function hourToTime(hour) {
   var hours = [6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  return hours[hour] + ':00' + (hour > 6 ? 'pm' : 'am');
+  return hours[hour] + ':00' + (hour > 5 ? 'pm' : 'am');
 }
+
+main();

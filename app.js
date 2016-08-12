@@ -4,52 +4,46 @@ function CoffeeShop(location, minCust, maxCust, avgCups, avgLbs) {
   this.maxCust = maxCust;
   this.avgCups = avgCups;
   this.avgLbs = avgLbs;
-  this.maxEmployeesNeeded = 0;
+  this.beanTotal = 0;
+  this.totalEmployeeHours = 0;
   this.projectAll();
 }
 
 CoffeeShop.prototype.generateCustomers = function() {
   this.customersHourly = [];
-  this.totalCustomers = 0;
   for (var i = 0;i < 15;i++) {
     this.customersHourly[i] = randInt(this.minCust, this.maxCust);
-    this.totalCustomers += this.customersHourly[i];
   }
 };
 
 CoffeeShop.prototype.projectCupsPH = function() {
   this.cupsHourly = [];
-  this.totalCups = 0;
   for (var i = 0;i < 15;i++) {
     this.cupsHourly[i] = this.customersHourly[i] * this.avgCups;
-    this.totalCups += this.cupsHourly[i];
   }
 };
 
 CoffeeShop.prototype.projectToGoPH = function() {
   this.togoHourly = [];
-  this.totalToGo = 0;
   for (var i = 0;i < 15;i++) {
     this.togoHourly[i] = Math.round(this.customersHourly[i] * this.avgLbs);
-    this.totalToGo += this.togoHourly[i];
+    this.beanTotal += this.togoHourly[i];
   }
 };
 
 CoffeeShop.prototype.projectBeansForCupsPH = function() {
   this.beansPerCupHourly = [];
-  this.beanTotal = 0;
   for (var i = 0;i < 15;i++) {
     this.beansPerCupHourly[i] = this.cupsHourly[i] / 16;
-    this.beanTotal += this.beansPerCupHourly[i] + this.togoHourly[i];
+    this.beanTotal += this.beansPerCupHourly[i];
   }
 };
 
 CoffeeShop.prototype.projectEmployeesPH = function() {
   this.employeesHourly = [];
   for (var i = 0;i < 15;i++) {
-    this.employeesHourly[i] = Math.ceil((this.customersHourly[i] * 2) / 60);
-    if (this.maxEmployeesNeeded < this.employeesHourly[i])
-      this.maxEmployeesNeeded = this.employeesHourly[i];
+    this.employeesHourly[i] = Math.ceil((this.customersHourly[i]) / 30);
+    this.totalEmployeeHours += this.employeesHourly[i];
   }
 };
 
@@ -76,7 +70,7 @@ CoffeeShop.prototype.displayEmployeesData = function() {
   var table = document.getElementById('employees-table');
   var shopRow = document.createElement('tr');
   appendNewElement(shopRow, 'td', this.locName);
-  appendNewElement(shopRow, 'td', this.maxEmployeesNeeded);
+  appendNewElement(shopRow, 'td', this.totalEmployeeHours);
   for (var i = 0;i < 15;i++) {
     appendNewElement(shopRow, 'td', this.employeesHourly[i]);
   }

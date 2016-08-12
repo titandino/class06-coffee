@@ -6,8 +6,13 @@
 .darkest-brown { color: #502900 }
 */
 
+header {
+  width: 75%;
+  margin: 0 auto;
+}
+
 body {
-  background-color: #502900;
+  background-color: #9E5000;
   font-family: 'Lalezar', cursive;
 }
 
@@ -19,18 +24,30 @@ h2 {
   font-weight: normal;
 }
 
-.table-section table {
+img {
+  width: 16em;
+  height: auto;
+}
+
+.main-body {
+  width: 75%;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
   background-color: #E17200;
   font-weight: normal;
-  border: 3px solid #7C3F00;
+  border: 3px solid #502900;
   margin: 0;
   padding: 0;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
-.table-section tr, th, td {
+tr, th, td {
   background-color: #E17200;
   font-weight: normal;
-  border: 3px solid #7C3F00;
+  border: 3px solid #502900;
+  margin: 0;
 }

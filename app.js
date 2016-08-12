@@ -86,7 +86,6 @@ CoffeeShop.prototype.displayEmployeesData = function() {
 function main() {
   var locations = [];
   locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
-  locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
   locations.push(new CoffeeShop('Capitol Hill', 12, 28, 3.2, 0.03));
   locations.push(new CoffeeShop('Seattle Public Library', 9, 45, 2.6, 0.02));
   locations.push(new CoffeeShop('South Lake Union', 5, 18, 1.3, 0.04));

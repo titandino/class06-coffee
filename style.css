@@ -24,7 +24,12 @@ h2 {
   font-weight: normal;
 }
 
-.table-section {
+img {
+  width: 16em;
+  height: auto;
+}
+
+.main-body {
   width: 75%;
   margin: 0 auto;
 }
@@ -44,4 +49,5 @@ tr, th, td {
   background-color: #E17200;
   font-weight: normal;
   border: 3px solid #502900;
+  margin: 0;
 }

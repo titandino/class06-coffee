@@ -1,7 +1,36 @@
+/*
+.darker-orange { color: #9E5000 }
+.orange { color: #E17200 }
+.lighter-orange { color: #BD6000 }
+.orangy-brown { color: #7C3F00 }
+.darkest-brown { color: #502900 }
+*/
+
 body {
-  background-color: #777
+  background-color: #502900;
+  font-family: 'Lalezar', cursive;
 }
 
-.table-section table, th, td {
-  border: 1px solid black;
+h1 {
+  font-weight: normal;
+}
+
+h2 {
+  font-weight: normal;
+}
+
+.table-section table {
+  background-color: #E17200;
+  font-weight: normal;
+  border: 3px solid #7C3F00;
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.table-section tr, th, td {
+  background-color: #E17200;
+  font-weight: normal;
+  border: 3px solid #7C3F00;
 }

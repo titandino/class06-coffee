@@ -92,6 +92,27 @@ function main() {
     locations[i].displaySalesData();
     locations[i].displayEmployeesData();
   }
+  calculateTotals('sales-table');
+  calculateTotals('employees-table');
+}
+
+function calculateTotals(tableName) {
+  var table = document.getElementById(tableName);
+  var totals = Array.apply(null, Array(table.rows[0].cells.length)).map(Number.prototype.valueOf, 0);
+
+  for (var r = 1;r < table.rows.length;r++) {
+    for(var c = 1;c < table.rows[r].cells.length;c++) {
+      totals[c] += parseFloat(table.rows[r].cells[c].textContent);
+    }
+  }
+
+  var totalsRow = document.createElement('tr');
+  appendNewElement(totalsRow, 'td', 'Total');
+  appendNewElement(totalsRow, 'td', round(totals[1], 10));
+  for (var i = 2;i < table.rows[0].cells.length;i++) {
+    appendNewElement(totalsRow, 'td', round(totals[i], 10));
+  }
+  table.appendChild(totalsRow);
 }
 
 function createShopTable(tableName) {

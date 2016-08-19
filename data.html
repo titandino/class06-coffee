@@ -15,6 +15,19 @@
         <table id="sales-table"><h2>Beans Needed Daily</h2></table>
         <table id="employees-table"><h2>Employees Needed Daily</h2></table>
       </section>
+      <section class="main-body">
+        <form id="location-form">
+          <fieldset>
+            <legend>Add New Store</legend>
+            <label>Location<input type="text" name="location"></label>
+            <label>Min Hourly Customers<input type="number" name="minCust"></label>
+            <label>Max Hourly Customers<input type="number" name="maxCust"></label>
+            <label>Average Cups Per Customer<input type="number" name="avgCups"></label>
+            <label>Average To-Go Pounds Per Customer<input type="number" name="avgLbs"></label>
+            <input type="button" name="submit" id="add-location" value="Submit">
+          </fieldset>
+        </form>
+      </section>
     </main>
     <script src="app.js" charset="utf-8"></script>
   </body>

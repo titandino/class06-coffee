@@ -132,7 +132,7 @@ function createShopTable(tableName) {
 
 function addLocation(event) {
   event.preventDefault();
-  var form = document.getElementById('location-form');
+  var form = event.target;
   locations.push(new CoffeeShop(form.elements['location'].value, form.elements['minCust'].value, form.elements['maxCust'].value, form.elements['avgCups'].value, form.elements['avgLbs'].value));
   main();
 }
@@ -164,6 +164,6 @@ function hourToTime(hour) {
 main();
 
 window.onload = function() {
-  var button = document.getElementById('add-location');
-  button.addEventListener('click', addLocation);
+  var form = document.getElementById('location-form');
+  form.addEventListener('submit', addLocation);
 };

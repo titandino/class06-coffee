@@ -133,7 +133,8 @@ function createShopTable(tableName) {
 function addLocation(event) {
   event.preventDefault();
   var form = event.target;
-  locations.push(new CoffeeShop(form.location.value, form.minCust.value, form.maxCust.value, form.avgCups.value, form.avgLbs.value));
+  console.log(form.minCust.value); //it is indeed a number type due to the input type in the HTML that I set
+  locations.push(new CoffeeShop(form.location.value, parseFloat(form.minCust.value), parseFloat(form.maxCust.value), parseFloat(form.avgCups.value), parseFloat(form.avgLbs.value)));
   main();
 }
 

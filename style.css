@@ -9,6 +9,7 @@
 header {
   width: 75%;
   margin: 0 auto;
+  background-color: #BD6000;
 }
 
 body {
@@ -18,10 +19,14 @@ body {
 
 h1 {
   font-weight: normal;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 h2 {
   font-weight: normal;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 img {
@@ -32,6 +37,17 @@ img {
 .main-body {
   width: 75%;
   margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #E17200;
+}
+
+.info {
+  padding: 0 10px;
+}
+
+#mission {
+  width: 100%;
 }
 
 table {

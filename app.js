@@ -1,10 +1,3 @@
-var locations = [];
-locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
-locations.push(new CoffeeShop('Capitol Hill', 12, 28, 3.2, 0.03));
-locations.push(new CoffeeShop('Seattle Public Library', 9, 45, 2.6, 0.02));
-locations.push(new CoffeeShop('South Lake Union', 5, 18, 1.3, 0.04));
-locations.push(new CoffeeShop('Sea-Tac Airport', 28, 44, 1.1, 0.41));
-
 function CoffeeShop(location, minCust, maxCust, avgCups, avgLbs) {
   this.locName = location;
   this.minCust = minCust;
@@ -13,6 +6,7 @@ function CoffeeShop(location, minCust, maxCust, avgCups, avgLbs) {
   this.avgLbs = avgLbs;
   this.beanTotal = 0;
   this.totalEmployeeHours = 0;
+  this.projectAll();
 }
 
 CoffeeShop.prototype.generateCustomers = function() {
@@ -62,8 +56,6 @@ CoffeeShop.prototype.projectAll = function() {
 };
 
 CoffeeShop.prototype.displaySalesData = function() {
-  if (!this.customersHourly)
-    this.projectAll();
   var table = document.getElementById('sales-table');
   var shopRow = document.createElement('tr');
   appendNewElement(shopRow, 'td', this.locName);
@@ -75,8 +67,6 @@ CoffeeShop.prototype.displaySalesData = function() {
 };
 
 CoffeeShop.prototype.displayEmployeesData = function() {
-  if (!this.customersHourly)
-    this.projectAll();
   var table = document.getElementById('employees-table');
   var shopRow = document.createElement('tr');
   appendNewElement(shopRow, 'td', this.locName);
@@ -88,6 +78,13 @@ CoffeeShop.prototype.displayEmployeesData = function() {
 };
 
 function main() {
+  var locations = [];
+  locations.push(new CoffeeShop('Pike Place Market', 14, 35, 1.2, 0.34));
+  locations.push(new CoffeeShop('Capitol Hill', 12, 28, 3.2, 0.03));
+  locations.push(new CoffeeShop('Seattle Public Library', 9, 45, 2.6, 0.02));
+  locations.push(new CoffeeShop('South Lake Union', 5, 18, 1.3, 0.04));
+  locations.push(new CoffeeShop('Sea-Tac Airport', 28, 44, 1.1, 0.41));
+
   createShopTable('sales-table');
   createShopTable('employees-table');
 
@@ -121,25 +118,12 @@ function calculateTotals(tableName) {
 function createShopTable(tableName) {
   var table = document.getElementById(tableName);
   var header = document.createElement('tr');
-  clearChildren(table);
   appendNewElement(header, 'th', 'Location');
   appendNewElement(header, 'th', 'Total');
   for (var i = 0;i < 15;i++) {
     appendNewElement(header, 'th', hourToTime(i));
   }
   table.appendChild(header);
-}
-
-function addLocation(event) {
-  event.preventDefault();
-  var form = event.target;
-  locations.push(new CoffeeShop(form.location.value, form.minCust.value, form.maxCust.value, form.avgCups.value, form.avgLbs.value));
-  main();
-}
-
-function clearChildren(node) {
-  while(node.firstChild)
-    node.removeChild(node.firstChild);
 }
 
 function appendNewElement(parent, elementType, text) {
@@ -162,8 +146,3 @@ function hourToTime(hour) {
 }
 
 main();
-
-window.onload = function() {
-  var form = document.getElementById('location-form');
-  form.addEventListener('submit', addLocation);
-};

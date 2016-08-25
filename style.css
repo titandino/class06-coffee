@@ -10,6 +10,7 @@ header {
   width: 75%;
   margin: 0 auto;
   background-color: #BD6000;
+  padding: 0 10px;
 }
 
 body {
@@ -40,6 +41,7 @@ img {
   display: flex;
   flex-flow: row wrap;
   background-color: #E17200;
+  padding: 0 10px;
 }
 
 .info {
